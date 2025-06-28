@@ -120,41 +120,61 @@ if choice == "Hypertension":
 elif choice == "Diabetes":
     st.header("🩸 Diabetes Prediction")
 
-    st.markdown("### 🧾 Basic Health Information")
-    pregnancies = st.number_input("Number of Pregnancies", 0, 20, 1)
-    glucose = st.number_input(
-        "Glucose Level (mg/dL)",
-        help="Blood sugar level after fasting (normal: 70–130)",
-        min_value=0, max_value=200, value=120)
+    st.markdown("### 🧾 Basic Personal & Lifestyle Info")
 
-    bp = st.number_input(
-        "Blood Pressure (mm Hg)",
-        help="Normal ~80, higher values may be risky",
-        min_value=0, max_value=150, value=70)
+    age = st.slider("Age Category", 1, 13, 5, help="Age buckets (e.g., 1=18-24, 13=80+)")  # Assuming bucketed as in BRFSS
+    sex = st.selectbox("Sex", ["Female", "Male"])
+    sex = 0 if sex == "Female" else 1
 
-    skin = st.number_input(
-        "Skin Thickness (mm)",
-        help="Measured at triceps (normal: 20–35 mm)",
-        min_value=0, max_value=100, value=20)
+    high_chol = st.selectbox("High Cholesterol?", ["No", "Yes"])
+    high_chol = 1 if high_chol == "Yes" else 0
 
-    insulin = st.number_input(
-        "Insulin Level (mu U/mL)",
-        help="Normal range is 16–166",
-        min_value=0, max_value=900, value=80)
+    chol_check = st.selectbox("Cholesterol Checked in last 5 years?", ["No", "Yes"])
+    chol_check = 1 if chol_check == "Yes" else 0
 
-    bmi = st.number_input(
-        "Body Mass Index (BMI)",
-        help="Weight-to-height ratio. 18.5–24.9 is healthy.",
-        min_value=0.0, max_value=70.0, value=25.0)
+    bmi = st.number_input("BMI (Body Mass Index)", 10.0, 60.0, 25.0)
 
-    dpf = st.number_input(
-        "Diabetes Pedigree Function",
-        help="Higher value = higher genetic risk",
-        min_value=0.0, max_value=3.0, value=0.5)
+    st.markdown("### 🚬 Habits & Heart Health")
 
-    age = st.slider("Age (in years)", 1, 120, 30)
+    smoker = st.selectbox("Do you smoke?", ["No", "Yes"])
+    smoker = 1 if smoker == "Yes" else 0
 
-    X = np.array([[pregnancies, glucose, bp, skin, insulin, bmi, dpf, age]])
+    heart_disease = st.selectbox("History of Heart Disease or Heart Attack?", ["No", "Yes"])
+    heart_disease = 1 if heart_disease == "Yes" else 0
+
+    phys_activity = st.selectbox("Physical Activity in last 30 days?", ["No", "Yes"])
+    phys_activity = 1 if phys_activity == "Yes" else 0
+
+    fruits = st.selectbox("Do you consume fruits daily?", ["No", "Yes"])
+    fruits = 1 if fruits == "Yes" else 0
+
+    veggies = st.selectbox("Do you consume vegetables daily?", ["No", "Yes"])
+    veggies = 1 if veggies == "Yes" else 0
+
+    alcohol = st.selectbox("Heavy Alcohol Consumption?", ["No", "Yes"])
+    alcohol = 1 if alcohol == "Yes" else 0
+
+    st.markdown("### 🧠🦵 Health Status")
+
+    gen_health = st.slider("General Health (1=Excellent, 5=Poor)", 1, 5, 3)
+    mental_health = st.slider("Poor Mental Health Days (last 30)", 0, 30, 5)
+    physical_health = st.slider("Poor Physical Health Days (last 30)", 0, 30, 5)
+    diff_walk = st.selectbox("Difficulty Walking?", ["No", "Yes"])
+    diff_walk = 1 if diff_walk == "Yes" else 0
+
+    stroke = st.selectbox("History of Stroke?", ["No", "Yes"])
+    stroke = 1 if stroke == "Yes" else 0
+
+    high_bp = st.selectbox("High Blood Pressure?", ["No", "Yes"])
+    high_bp = 1 if high_bp == "Yes" else 0
+
+    # Final input array
+    X = np.array([[age, sex, high_chol, chol_check, bmi, smoker, heart_disease,
+                   phys_activity, fruits, veggies, alcohol, gen_health,
+                   mental_health, physical_health, diff_walk, stroke,
+                   high_bp]])
+
+    # Scale and predict
     X_scaled = diabetes_scaler.transform(X)
 
     if st.button("Predict Diabetes"):
