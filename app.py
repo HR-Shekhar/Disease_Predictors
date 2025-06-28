@@ -8,7 +8,9 @@ st.write("Predict your risk of **Hypertension (High BP)** or **Diabetes** using 
 
 # Load models
 ht_model = joblib.load("Hypertension.pkl")
-diabetes_model = joblib.load("Diabetes.pkl")
+diabetes_model_data = joblib.load("Diabetes.pkl")
+diabetes_model = diabetes_model_data["model"]
+diabetes_scaler = diabetes_model_data["scaler"]
 
 def sigmoid(z):
     z = np.clip(z, -500, 500)
@@ -153,8 +155,8 @@ elif choice == "Diabetes":
     age = st.slider("Age (in years)", 1, 120, 30)
 
     X = np.array([[pregnancies, glucose, bp, skin, insulin, bmi, dpf, age]])
-    X_scaled = diabetes_model["scaler"].transform(X)
+    X_scaled = diabetes_scaler.transform(X)
 
     if st.button("Predict Diabetes"):
-        pred = diabetes_model["model"].predict[0]
+        pred = diabetes_model.predict(X_scaled)[0]
         st.warning("⚠️ You may be at risk of Diabetes.") if pred else st.success("✅ You are unlikely to have Diabetes.")
