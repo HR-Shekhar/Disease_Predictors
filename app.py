@@ -188,4 +188,4 @@ elif choice == "Diabetes":
         if pred:
             st.warning("⚠️ You may be at risk of Diabetes.")
         else:
-            st.success("✅ You are unlikely to have Diabetes."
+            st.success("✅ You are unlikely to have Diabetes.")
