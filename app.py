@@ -114,7 +114,12 @@ if choice == "Hypertension":
 
     if st.button("Predict Hypertension"):
         pred = predict(X_scaled, ht_model["w"], ht_model["b"])[0]
-        st.warning("⚠️ You may be at risk of Hypertension.") if pred else st.success("✅ You are unlikely to have Hypertension.")
+        
+        if pred:
+            st.warning("⚠️ You may be at risk of Hypertension.")
+        else:
+            st.success("✅ You are unlikely to have Hypertension.")
+
 
 # Diabetes Section
 elif choice == "Diabetes":
@@ -179,4 +184,8 @@ elif choice == "Diabetes":
 
     if st.button("Predict Diabetes"):
         pred = diabetes_model.predict(X_scaled)[0]
-        st.warning("⚠️ You may be at risk of Diabetes.") if pred else st.success("✅ You are unlikely to have Diabetes.")
+        
+        if pred:
+            st.warning("⚠️ You may be at risk of Diabetes.")
+        else:
+            st.success("✅ You are unlikely to have Diabetes."
