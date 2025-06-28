@@ -156,5 +156,5 @@ elif choice == "Diabetes":
     X_scaled = diabetes_model["scaler"].transform(X)
 
     if st.button("Predict Diabetes"):
-        pred = predict(X_scaled, diabetes_model["w"], diabetes_model["b"])[0]
+        pred = diabetes_model["model"].predict[0]
         st.warning("⚠️ You may be at risk of Diabetes.") if pred else st.success("✅ You are unlikely to have Diabetes.")
