@@ -118,8 +118,6 @@ if choice == "Hypertension":
         pred = predict(X_scaled, ht_model["w"], ht_model["b"])[0]
         st.write("Input after scaling:", X_scaled)
         prob = sigmoid(np.dot(ht_model["w"], X_scaled[0]) + ht_model["b"])
-        st.write(ht_model['w'])
-        st.write(ht_model['b'])
         st.write(f"🔢 Raw Probability of Hypertension: {prob:.2f}")
         if pred:
             st.warning("⚠️ You may be at risk of Hypertension.")
@@ -131,6 +129,13 @@ if choice == "Hypertension":
         st.markdown("**🔍 Model Performance on Test Set:**")
         st.markdown("- ✅ Accuracy: **83%**")
         st.markdown("- 📈 ROC AUC Score: **89%**")
+        # Debug section to show model parameters (weights and bias)
+    with st.expander("📊 View Model Parameters (w & b)"):
+        st.markdown("**Model Weights (w):**")
+        st.write(ht_model["w"])
+
+        st.markdown("**Model Bias (b):**")
+        st.write(ht_model["b"])
 
 # Diabetes Section
 elif choice == "Diabetes":
