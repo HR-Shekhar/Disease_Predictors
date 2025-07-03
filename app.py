@@ -110,17 +110,10 @@ if choice == "Hypertension":
 
     X = np.array([[age, cp, trestbps, chol, restecg, thalach,
                    exang, slope, ca, thal]])
-    st.write("Input before scaling:", X)
-    st.write("Shape of input:", X.shape)
     X_scaled = ht_model["scaler"].transform(X)
 
     if st.button("Predict Hypertension"):
         pred = predict(X_scaled, ht_model["w"], ht_model["b"])[0]
-        st.write("Input after scaling:", X_scaled)
-        z = np.dot(ht_model["w"], X_scaled[0]) + ht_model["b"]
-        st.write(f"z = {z}")
-        prob = sigmoid(z)
-        st.write(f"🔢 Raw Probability of Hypertension: {prob:.6f}")
         if pred:
             st.warning("⚠️ You may be at risk of Hypertension.")
         else:
@@ -131,15 +124,6 @@ if choice == "Hypertension":
         st.markdown("**🔍 Model Performance on Test Set:**")
         st.markdown("- ✅ Accuracy: **83%**")
         st.markdown("- 📈 ROC AUC Score: **89%**")
-    # Debug section to show model parameters (weights and bias)
-    st.write("w shape:", ht_model["w"].shape)
-    st.write("X_scaled[0] shape:", X_scaled[0].shape)
-    st.write("w values:", ht_model["w"])
-    st.write("X_scaled[0] values:", X_scaled[0])
-    dot = np.dot(ht_model["w"], X_scaled[0])
-    st.write(f"w·x: {dot}")
-    st.write(f"Bias (b): {ht_model['b']}")
-    st.write(f"z = w·x + b = {dot + ht_model['b']}")
 
 # Diabetes Section
 elif choice == "Diabetes":
