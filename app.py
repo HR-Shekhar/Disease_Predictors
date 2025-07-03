@@ -4,7 +4,7 @@ import joblib
 
 st.set_page_config(page_title="Health Risk Prediction", layout="centered")
 st.title("🏥 Health Risk Prediction App")
-st.write("Predict your risk of **Hypertension (High BP)** or **Diabetes** using basic health indicators.")
+st.write("Predict your risk of **Hypertension (High BP())** or **Diabetes** using basic health indicators.")
 
 # Load models
 ht_model = joblib.load("Hypertension.pkl")
@@ -114,12 +114,17 @@ if choice == "Hypertension":
 
     if st.button("Predict Hypertension"):
         pred = predict(X_scaled, ht_model["w"], ht_model["b"])[0]
-        
+
         if pred:
             st.warning("⚠️ You may be at risk of Hypertension.")
         else:
             st.success("✅ You are unlikely to have Hypertension.")
 
+        # Static metrics (as per your offline testing)
+        st.markdown("---")
+        st.markdown("**🔍 Model Performance on Test Set:**")
+        st.markdown("- ✅ Accuracy: **83%**")
+        st.markdown("- 📈 ROC AUC Score: **89%**")
 
 # Diabetes Section
 elif choice == "Diabetes":
@@ -184,8 +189,14 @@ elif choice == "Diabetes":
 
     if st.button("Predict Diabetes"):
         pred = diabetes_model.predict(X_scaled)[0]
-        
+
         if pred:
             st.warning("⚠️ You may be at risk of Diabetes.")
         else:
             st.success("✅ You are unlikely to have Diabetes.")
+
+        # Static metrics (as per your offline testing)
+        st.markdown("---")
+        st.markdown("**🔍 Model Performance on Test Set:**")
+        st.markdown("- ✅ Accuracy: **75%**")
+        st.markdown("- 📈 ROC AUC Score: **82%**")
