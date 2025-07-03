@@ -109,7 +109,7 @@ if choice == "Hypertension":
     thal = int(thal.split(" - ")[0])
 
     X = np.array([[age, cp, trestbps, chol, restecg, thalach,
-                   exang, slope, ca, thal]])
+                    slope]])
     st.write("Input before scaling:", X)
     st.write("Shape of input:", X.shape)
     X_scaled = ht_model["scaler"].transform(X)
