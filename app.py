@@ -110,11 +110,13 @@ if choice == "Hypertension":
 
     X = np.array([[age, cp, trestbps, chol, restecg, thalach,
                    exang, slope, ca, thal]])
+    st.write("Input before scaling:", X)
+    st.write("Shape of input:", X.shape)
     X_scaled = ht_model["scaler"].transform(X)
 
     if st.button("Predict Hypertension"):
         pred = predict(X_scaled, ht_model["w"], ht_model["b"])[0]
-
+        st.write("Input after scaling:", X_scaled)
         if pred:
             st.warning("⚠️ You may be at risk of Hypertension.")
         else:
