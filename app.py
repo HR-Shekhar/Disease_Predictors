@@ -118,6 +118,8 @@ if choice == "Hypertension":
         pred = predict(X_scaled, ht_model["w"], ht_model["b"])[0]
         st.write("Input after scaling:", X_scaled)
         prob = sigmoid(np.dot(ht_model["w"], X_scaled[0]) + ht_model["b"])
+        st.write(ht_model['w'])
+        st.write(ht_model['b'])
         st.write(f"🔢 Raw Probability of Hypertension: {prob:.2f}")
         if pred:
             st.warning("⚠️ You may be at risk of Hypertension.")
