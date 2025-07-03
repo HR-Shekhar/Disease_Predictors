@@ -108,8 +108,8 @@ if choice == "Hypertension":
         ])
     thal = int(thal.split(" - ")[0])
 
-    X = np.array([[age, sex, cp, trestbps, chol, fbs, restecg, thalach,
-                   exang, oldpeak, slope, ca, thal]])
+    X = np.array([[age, cp, trestbps, chol, restecg, thalach,
+                   exang, slope, ca, thal]])
     X_scaled = ht_model["scaler"].transform(X)
 
     if st.button("Predict Hypertension"):
@@ -132,7 +132,7 @@ elif choice == "Diabetes":
 
     st.markdown("### 🧾 Basic Personal & Lifestyle Info")
 
-    age = st.slider("Age Category", 1, 13, 5, help="Age buckets (e.g., 1=18-24, 13=80+)")  # Assuming bucketed as in BRFSS
+    age = st.slider("Age Category Age buckets (e.g., 1=18-24, 13=80+)", 1, 13, 5)  # Assuming bucketed as in BRFSS
     sex = st.selectbox("Sex", ["Female", "Male"])
     sex = 0 if sex == "Female" else 1
 
