@@ -136,6 +136,10 @@ if choice == "Hypertension":
     st.write("X_scaled[0] shape:", X_scaled[0].shape)
     st.write("w values:", ht_model["w"])
     st.write("X_scaled[0] values:", X_scaled[0])
+    dot = np.dot(ht_model["w"], X_scaled[0])
+    st.write(f"w·x: {dot}")
+    st.write(f"Bias (b): {ht_model['b']}")
+    st.write(f"z = w·x + b = {dot + ht_model['b']}")
 
 # Diabetes Section
 elif choice == "Diabetes":
