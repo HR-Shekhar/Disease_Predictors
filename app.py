@@ -107,7 +107,7 @@ if choice == "Hypertension":
             "7 - Reversible Defect (blood flow issue)"
         ])
     thal = int(thal.split(" - ")[0])
-    X = np.array([age, cp, trestbps, chol, restecg, thalach, slope])
+    X = np.array([[age, cp, trestbps, chol, restecg, thalach, slope]])
     st.write("Input before scaling:", X)
     st.write("Shape of input:", X.shape)
     X_scaled = ht_model["scaler"].transform(X)
